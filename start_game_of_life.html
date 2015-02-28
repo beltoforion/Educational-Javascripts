@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Game of Life</title>
+  <script type="text/javascript" src="./game_of_life.js"></script>
+  <style type="text/css">
+      canvas { border: 1px solid black; }
+  </style>
+</head>
+<body>
+  <div style="position:absolute; width:800; height: 600;">
+    <canvas id="cvMain" width="800" height="600"/>
+  </div>
+  <div style="position:absolute; width:800px; top:620px;">
+      <input type="button"   value="Clear"        onclick="cmd='clear';"  style="width:100px; height:60px;"/>
+      <input type="button"   value="Run / Cont."  onclick="cmd='run';"    style="width:100px; height:60px;"/>
+      <input type="button"   value="Single Step"  onclick="cmd='single';" style="width:100px; height:60px;"/>
+      <label style="width:100px; height:60px;"><input id="cbToroidal" type="checkbox" checked="true" onclick="cmd='update';" />Toroidal World</label>
+  </div>
+
+  <div style="position:absolute; left:820px; width:200px; height:600px; top:100px;">
+    <input type="button"   value="Randomize"               onclick="cmd='random';"  style="width:180px; height:40px;"/>
+    <input type="button"   value="R-pentomino"             onclick="cmd='pat1';"    style="width:180px; height:40px;"/>
+    <input type="button"   value="Glider"                  onclick="cmd='pat2';"    style="width:180px; height:40px;"/>
+    <input type="button"   value="Spaceship"               onclick="cmd='pat3';"    style="width:180px; height:40px;"/>
+    <input type="button"   value="Trans Queen Bee Shuttle" onclick="cmd='pat4';"    style="width:180px; height:40px;"/>
+    <input type="button"   value="Queen Bee Loop"          onclick="cmd='pat5';"    style="width:180px; height:40px;"/>
+    <input type="button"   value="Partial Queen Bee Loop"  onclick="cmd='pat6';"    style="width:180px; height:40px;"/>
+    <input type="button"   value="Tagalong for two LWSS"   onclick="cmd='pat7';"    style="width:180px; height:40px;"/>
+    <input type="button"   value="Glider Duplicator"       onclick="cmd='pat8';"    style="width:180px; height:40px;"/>
+    <input type="button"   value="Twogun"                  onclick="cmd='pat9';"    style="width:180px; height:40px;"/>
+    <input type="button"   value="Newgun"                  onclick="cmd='pat10';"   style="width:180px; height:40px;"/>
+  </div>
+
+  <script>
+  game_of_life( { cvid        : 'cvMain',
+                  is_running  : true,
+                  is_torodial : true,
+                  delay       : 20,  
+                  cells_x     : 200,
+                  cells_y     : 200 * 0.75 }, 
+                 null );
+  </script>
+</body>
+</html>
