@@ -26,7 +26,11 @@ function game_of_life(cfg, pat) {
     var ctxBack = cvBack.getContext("2d"); 
 
     // Colors and Styles
-    var colBack = "rgb(0,0,0)";
+    var rgbaDead  = new Array( 30, 30, 35, 255);
+    var rgbaAlive = new Array(255, 255, 105, 255);
+    var colGrid = "#202040";
+    var colGrid2 = "#252540";
+
     var presets = init_presets();
 
     var initial_pattern = 0;
@@ -158,6 +162,12 @@ function game_of_life(cfg, pat) {
                       + "18bo26b$2o4b4o10b2o2b2ob3o21b$2o2b2ob3o10b2o4b4o21b$4bo19b2o!",
                  torodial : false };
 
+      p[i++] = { name : "Block-laying switch engine ", 
+                 xpos : 150,
+                 ypos : 110,
+                 rle  : "18bo10b$b3o8bo5bo10b$o3bo6bo7bo9b$b2o9b4o2b2o9b$3b2ob2o9b3o9b$5b2o11bo"
+                      + "bo8b$19bo7b2o$19bo7b2o11$7b2o20b$7b2o20b7$15b2o12b$15b2o!",
+                 torodial : true };
       return p;
     }
 
@@ -245,6 +255,7 @@ function game_of_life(cfg, pat) {
       case "pat8":   init_with_pattern(presets[7]); break;
       case "pat9":   init_with_pattern(presets[8]); break;
       case "pat10":  init_with_pattern(presets[9]); break;
+      case "pat11":  init_with_pattern(presets[10]); break;
       case 'single': is_running = false;  
                      move(); 
                      draw(); 
@@ -326,6 +337,7 @@ function game_of_life(cfg, pat) {
     }
 
     function draw_grid() {
+
       ctx.beginPath();
       for (var i=0; i<cells_x; ++i) {
           ctx.moveTo(i * cell_width, 0);
@@ -336,22 +348,36 @@ function game_of_life(cfg, pat) {
           ctx.moveTo(0, j * cell_height);
           ctx.lineTo(cells_x * cell_width, j* cell_height);
       }
-      ctx.strokeStyle="#202040";
+      ctx.strokeStyle=colGrid;
       ctx.stroke();
+
+      ctx.beginPath();
+      for (var i=0; i<cells_x; i+=10) {
+          ctx.moveTo(i * cell_width, 0);
+          ctx.lineTo(i * cell_width, cells_y * cell_height);
+      }
+
+      for (var j=0; j<cells_y; j+=10) {
+          ctx.moveTo(0, j * cell_height);
+          ctx.lineTo(cells_x * cell_width, j* cell_height);
+      }
+      ctx.strokeStyle=colGrid2;
+      ctx.stroke();
+	
     }
  
     function set_cell_value(x, y, v) {
         world_data[0][y*cells_x + x] = v;
         if (v==0) {
-          world_img.data[4*(y*cells_x + x)    ] =  20;
-          world_img.data[4*(y*cells_x + x) + 1] =  20;
-          world_img.data[4*(y*cells_x + x) + 2] =  50;
-          world_img.data[4*(y*cells_x + x) + 3] = 255;
+          world_img.data[4*(y*cells_x + x)    ] =  rgbaDead[0]; //20;
+          world_img.data[4*(y*cells_x + x) + 1] =  rgbaDead[1]; //20;
+          world_img.data[4*(y*cells_x + x) + 2] =  rgbaDead[2]; //50;
+          world_img.data[4*(y*cells_x + x) + 3] =  rgbaDead[3]; //255;
        } else {
-          world_img.data[4*(y*cells_x + x)    ] = 255;
-          world_img.data[4*(y*cells_x + x) + 1] = 255;
-          world_img.data[4*(y*cells_x + x) + 2] = 150;
-          world_img.data[4*(y*cells_x + x) + 3] = 255;
+          world_img.data[4*(y*cells_x + x)    ] = rgbaAlive[0]; //255;
+          world_img.data[4*(y*cells_x + x) + 1] = rgbaAlive[1]; //255;
+          world_img.data[4*(y*cells_x + x) + 2] = rgbaAlive[2]; //150;
+          world_img.data[4*(y*cells_x + x) + 3] = rgbaAlive[3]; //255;
        }
     }
 
