@@ -168,6 +168,13 @@ function game_of_life(cfg, pat) {
                  rle  : "18bo10b$b3o8bo5bo10b$o3bo6bo7bo9b$b2o9b4o2b2o9b$3b2ob2o9b3o9b$5b2o11bo"
                       + "bo8b$19bo7b2o$19bo7b2o11$7b2o20b$7b2o20b7$15b2o12b$15b2o!",
                  torodial : true };
+
+      // source: http://www.conwaylife.com/forums/viewtopic.php?p=4610#p4610
+      p[i++] = { name : "18-cell 40514-generation methuselah", 
+                 xpos : 90,
+                 ypos : 55,
+                 rle  : "77bo$77bo$77bo21$3o20$3bo$3bo$3bo5$20b3o$9b3o10bo$22bo$21bo!",
+                 torodial : false };
       return p;
     }
 
@@ -256,6 +263,7 @@ function game_of_life(cfg, pat) {
       case "pat9":   init_with_pattern(presets[8]); break;
       case "pat10":  init_with_pattern(presets[9]); break;
       case "pat11":  init_with_pattern(presets[10]); break;
+      case "pat12":  init_with_pattern(presets[11]); break;
       case 'single': is_running = false;  
                      move(); 
                      draw(); 
