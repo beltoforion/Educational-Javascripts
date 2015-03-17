@@ -13,6 +13,8 @@ function game_of_life(cfg, pat) {
 
     // Canvas, Drawing Context and Backbuffer
     var cv = document.getElementById(cfg.cvid);
+    cv.addEventListener('mousedown', mouse_down, false);
+
     var ctx = cv.getContext("2d");
     var cvBack = document.createElement("canvas");
     cvBack.id = "cvBack";
@@ -20,6 +22,7 @@ function game_of_life(cfg, pat) {
     cvBack.width = cells_x;
     cvBack.height = cells_y;
     cvBack.style.display="none";
+
 
     var body = document.getElementsByTagName("body")[0];
     body.appendChild(cvBack);
@@ -54,6 +57,22 @@ function game_of_life(cfg, pat) {
     //
     // Member Functions
     // 
+
+    function getMousePos(canvas, evt) {
+      var rect = canvas.getBoundingClientRect();
+      return {
+        x: evt.clientX - rect.left,
+        y: evt.clientY - rect.top
+      };
+    }
+
+    function mouse_down(evt) {
+      var mousePos = getMousePos(cv, evt);
+      var x = Math.floor(mousePos.x / cell_width);
+      var y = Math.floor(mousePos.y / cell_height);
+      var v = get_cell_value(0, x, y); 
+      set_cell_value(x, y, (v==1) ? 0 : 1);
+    }
 
     // Initialize with a RLE encoded Pattern
     function init_with_pattern(p) { 
