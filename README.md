@@ -3,7 +3,7 @@ This is the demonstration page for the educational javascripts
 
 For more details on the Javascript applets please refer to their original web pages:
 
-- John Conway's Game of Life:		
+- John Conway's Game of Life:<br/>		
 http://articles.beltoforion.de/article.php?a=game_of_life	
 
 - Simulated evolution:      
